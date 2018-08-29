@@ -8,7 +8,7 @@ package com.prog111mil.deliveryfast.ui;
 import com.prog111mil.deliveryfast.controller.PedidosController;
 import com.prog111mil.deliveryfast.entity.Direccion;
 import com.prog111mil.deliveryfast.entity.EstadoPedido;
-import com.prog111mil.deliveryfast.entity.FormasPago;
+import com.prog111mil.deliveryfast.entity.FormaPago;
 import com.prog111mil.deliveryfast.entity.Pedido;
 import com.prog111mil.deliveryfast.entity.Usuario;
 import javax.swing.JFrame;
@@ -89,9 +89,9 @@ public class PedidoForm extends javax.swing.JFrame {
             error = "Debe ingresar una calle de origen para un pedido ida y vuelta";
         } else if (chkIdaVuelta.isSelected() && txtNroOrigen.getText().equals("")) {
             error = "Debe ingresar el número de la calle de origen para un pedido ida y vuelta";
-        } else if ((((FormasPago) cbFormaPago.getSelectedItem()).equals(new FormasPago("Efectivo"))) && (txtPago.getText().equals(""))) {
+        } else if ((((FormaPago) cbFormaPago.getSelectedItem()).equals(new FormaPago("Efectivo"))) && (txtPago.getText().equals(""))) {
             error = "Para un pago en efectivo debe ingresar el monto con el cual va a abonar";
-        } else if ((((FormasPago) cbFormaPago.getSelectedItem()).equals(new FormasPago("Efectivo"))) && (!txtPago.getText().equals(""))) {
+        } else if ((((FormaPago) cbFormaPago.getSelectedItem()).equals(new FormaPago("Efectivo"))) && (!txtPago.getText().equals(""))) {
             double total = 0;
             if (!txtTotal.getText().equals("")) {
                 total = Double.valueOf(txtTotal.getText());
@@ -213,7 +213,11 @@ public class PedidoForm extends javax.swing.JFrame {
 
         txtNroOrigen.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        txtNroDestino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txtPisoOrigen.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtNroDestino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        txtPisoDestino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -473,7 +477,6 @@ public class PedidoForm extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblError)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -481,8 +484,6 @@ public class PedidoForm extends javax.swing.JFrame {
                     .addComponent(btnCancelar))
                 .addContainerGap())
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Datos del Usuario");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -501,14 +502,14 @@ public class PedidoForm extends javax.swing.JFrame {
                 lblError.setVisible(true);
             } else {
                 Direccion origen = null;
-                if (txtCalleOrigen.getText() != null) {
+                if (!txtCalleOrigen.getText().equals("")) {
                     origen = new Direccion();
                     origen.setCalle(txtCalleOrigen.getText());
                     origen.setNumero(Integer.valueOf(txtNroOrigen.getText()));
-                    if (txtPisoOrigen.getText() != null) {
+                    if (!txtPisoOrigen.getText().equals("")) {
                         origen.setPiso(Integer.valueOf(txtPisoOrigen.getText()));
                     }
-                    if (txtDeptoOrigen.getText() != null) {
+                    if (!txtDeptoOrigen.getText().equals("")) {
                         origen.setDepto(txtDeptoOrigen.getText());
                     }
                 }
@@ -516,10 +517,10 @@ public class PedidoForm extends javax.swing.JFrame {
                 Direccion destino = new Direccion();
                 destino.setCalle(txtCalleDestino.getText());
                 destino.setNumero(Integer.valueOf(txtNroDestino.getText()));
-                if (txtPisoDestino.getText() != null) {
+                if (!txtPisoDestino.getText().equals("")) {
                     destino.setPiso(Integer.valueOf(txtPisoDestino.getText()));
                 }
-                if (txtDeptoDestino.getText() != null) {
+                if (!txtDeptoDestino.getText().equals("")) {
                     destino.setDepto(txtDeptoDestino.getText());
                 }
                 error = controller.validarDireccionesUsuario(usuario, origen, destino);
@@ -536,9 +537,13 @@ public class PedidoForm extends javax.swing.JFrame {
                     p.setDireccionDestino(destino);
                     p.setIdaVuelta(chkIdaVuelta.isSelected());
                     p.setComision(comision);
-                    //p.setFormaPago();
-                    p.setPago(Double.valueOf(txtTotal.getText()));
-                    p.setEstado(new EstadoPedido("Pendiente"));
+                    p.setFormaPago((FormaPago) cbFormaPago.getSelectedItem());
+                    double total = 0;
+                    if (!txtTotal.getText().equals("")) {
+                        total = Double.valueOf(txtTotal.getText());
+                    }
+                    p.setPago(total);
+                    p.setEstado(controller.obtenerEstado("Pendiente"));
 
                     String mensaje = controller.agregarPedido(p);
 
@@ -566,7 +571,7 @@ public class PedidoForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPagoFocusLost
 
     private void cbFormaPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFormaPagoActionPerformed
-        if (((FormasPago) cbFormaPago.getSelectedItem()).equals(new FormasPago("Tarjeta VISA"))) {
+        if (((FormaPago) cbFormaPago.getSelectedItem()).equals(new FormaPago("Tarjeta VISA"))) {
             txtPago.setEnabled(false);
             if (!txtTotal.getText().equals("")) {
                 double total = Double.valueOf(txtTotal.getText()) + comision;

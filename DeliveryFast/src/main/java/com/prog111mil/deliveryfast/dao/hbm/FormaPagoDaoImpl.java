@@ -5,34 +5,33 @@
  */
 package com.prog111mil.deliveryfast.dao.hbm;
 
-import com.prog111mil.deliveryfast.dao.FormasPagoDao;
-import com.prog111mil.deliveryfast.entity.FormasPago;
+import com.prog111mil.deliveryfast.entity.FormaPago;
 import com.prog111mil.deliveryfast.entity.Usuario;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import com.prog111mil.deliveryfast.dao.FormaPagoDao;
 
 /**
  *
  * @author Federico
  */
-public class FormasPagoDaoImpl implements FormasPagoDao {
+public class FormaPagoDaoImpl implements FormaPagoDao {
 
     private final SessionFactory sessionFactory;
 
-    public FormasPagoDaoImpl(SessionFactory sessionFactory) {
+    public FormaPagoDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     
     @Override
-    public List<FormasPago> obtenerFormasDePago() {
-        List<FormasPago> formas;
+    public List<FormaPago> obtenerFormasDePago() {
+        List<FormaPago> formas;
         try (Session session = sessionFactory.openSession()) {
-            Query q = session.createQuery("from formas_pago", FormasPago.class);
+            Query q = session.createQuery("from FormaPago", FormaPago.class);
             formas = q.list();
         }
-        
         return formas;        
     }
     

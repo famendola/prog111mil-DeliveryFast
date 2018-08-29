@@ -107,7 +107,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Usuarios habilitados: &lt;br /&gt;&#xa;Prueba &lt;br /&gt;&#xa;Martina&#xa;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Usuarios habilitados: &lt;br /&gt;&#xa;Usuario1 &lt;br /&gt;&#xa;Usuario2&#xa;&lt;/html&gt;"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="lblAclaracion"/>

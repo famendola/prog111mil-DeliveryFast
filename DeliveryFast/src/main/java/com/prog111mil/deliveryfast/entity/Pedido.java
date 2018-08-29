@@ -20,7 +20,7 @@ public class Pedido {
     private Direccion direccionDestino;
     private boolean idaVuelta;
     private double comision;
-    private FormasPago formaPago;
+    private FormaPago formaPago;
     private double pago;
     private EstadoPedido estado;
     
@@ -90,11 +90,11 @@ public class Pedido {
         this.comision = comision;
     }
 
-    public FormasPago getFormaPago() {
+    public FormaPago getFormaPago() {
         return formaPago;
     }
 
-    public void setFormaPago(FormasPago formaPago) {
+    public void setFormaPago(FormaPago formaPago) {
         this.formaPago = formaPago;
     }
 
@@ -113,13 +113,4 @@ public class Pedido {
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
     }
-    
-    /*<id name="nroFactura" column="nro_factura"/>
-        <property name="fecha"/>
-        <property name="totalSinIva" column="total_sin_iva"/>
-        <property name="iva"/>
-        <property name="totalConIva" column="total_con_iva"/>
-        <many-to-one name="cliente" class="edu.db111mil.ventas.dao.Cliente" 
-                     column="nro_cliente"/>
-*/
 }

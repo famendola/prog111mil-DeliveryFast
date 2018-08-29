@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Bienvenido a Delivery Fast");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabel2.setText("<html>Usuarios habilitados: <br />\nPrueba <br />\nMartina\n</html>");
+        jLabel2.setText("<html>Usuarios habilitados: <br />\nUsuario1 <br />\nUsuario2\n</html>");
 
         jLabel3.setText("Usuario: ");
 

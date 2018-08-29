@@ -29,9 +29,6 @@ public class Main {
             new PedidosController(sessionFactory).run();
         } catch (Exception ex) {
             System.out.println(ex);
-        } finally {
-            if ((sessionFactory != null) && (sessionFactory.isOpen()))
-                sessionFactory.close();
         }
     }
 }

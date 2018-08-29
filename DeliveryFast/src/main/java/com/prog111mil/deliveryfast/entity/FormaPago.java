@@ -11,14 +11,14 @@ import java.util.Objects;
  *
  * @author Federico
  */
-public class FormasPago {
+public class FormaPago {
     private int id;
     private String tipo;
     
-    public FormasPago(){
+    public FormaPago(){
     }
 
-    public FormasPago(String tipo) {
+    public FormaPago(String tipo) {
         this.tipo = tipo;
     }
     
@@ -61,7 +61,7 @@ public class FormasPago {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final FormasPago other = (FormasPago) obj;
+        final FormaPago other = (FormaPago) obj;
         if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }

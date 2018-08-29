@@ -5,14 +5,13 @@
  */
 package com.prog111mil.deliveryfast.dao;
 
-import com.prog111mil.deliveryfast.entity.FormasPago;
-import java.util.List;
-
+import com.prog111mil.deliveryfast.entity.EstadoPedido;
 
 /**
  *
- * @author Federico
+ * @author Familia
  */
-public interface FormasPagoDao {
-    List<FormasPago> obtenerFormasDePago();
+public interface EstadoPedidoDao {
+    
+    EstadoPedido obtenerEstado(String estado);
 }
