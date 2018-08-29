@@ -5,8 +5,7 @@
  */
 package com.prog111mil.deliveryfast;
 
-import com.prog111mil.deliveryfast.entity.Usuario;
-import org.hibernate.Session;
+import com.prog111mil.deliveryfast.controller.PedidosController;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -23,13 +22,16 @@ public class Main {
             StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure() // obtiene los valores de hibernate.cfg.xml
             .build();
-        try (SessionFactory sessionFactory = new MetadataSources(registry)
-                .buildMetadata().buildSessionFactory(); 
-                Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Usuario u = session.load(Usuario.class, 1);
-            System.out.println(u);
-            session.getTransaction().commit();
+        SessionFactory sessionFactory = null;    
+        try {
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory(); 
+                
+            new PedidosController(sessionFactory).run();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            if ((sessionFactory != null) && (sessionFactory.isOpen()))
+                sessionFactory.close();
         }
     }
 }
