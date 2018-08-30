@@ -38,7 +38,6 @@ public class PedidoForm extends javax.swing.JFrame {
         this.lblCiudad.setText(usuario.getCiudad());
         this.lblComision.setText(lblComision.getText().replace("#p#", String.valueOf(comision)));
 
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         lblError.setVisible(false);
         cbFormaPago.setModel(new DefaultComboBoxModel(controller.obtenerFormasDePago().toArray()));
     }

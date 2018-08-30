@@ -45,7 +45,7 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/deliveryfast?serverTimezone=UTC</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">FedeVale#1705</property>
+    <property name="hibernate.connection.password">password</property>
     <mapping resource="usuario.hbm.xml"/>
     <mapping resource="formasPago.hbm.xml"/>
     <mapping resource="estadoPedido.hbm.xml"/>
